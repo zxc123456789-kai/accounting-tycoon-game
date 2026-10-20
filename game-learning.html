@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f7f4">
+<title>遊戲式學習設計指南</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<style>
+html { overflow-y: scroll }
+body { padding-left: calc(100vw - 100%) }
+body { background-color: #f5f7f4 }
+body { color: #183044 }
+body { font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif }
+.navbar { position: static }
+.navbar-brand { color: #183044 }
+.navbar-brand { font-weight: 800 }
+.nav-link { color: #476171 }
+.nav-link { font-weight: 600 }
+.hero { background-color: #eaf4ee }
+.hero { background-image: radial-gradient(circle at 12% 8%, #d6eee1 0, transparent 34%), linear-gradient(135deg, #eef6f1, #f7f4eb) }
+.hero { border-bottom: 1px solid #dce8df }
+.eyebrow { color: #23836b }
+.eyebrow { font-size: .78rem }
+.eyebrow { font-weight: 800 }
+.eyebrow { letter-spacing: .12em }
+.hero h1 { color: #142d40 }
+.hero h1 { font-size: clamp(2.3rem, 5vw, 4.6rem) }
+.hero h1 { font-weight: 850 }
+.hero h1 { letter-spacing: -.04em }
+.hero p { color: #4a6571 }
+.hero p { font-size: 1.12rem }
+.btn-primary { background-color: #1f806b }
+.btn-primary { border-color: #1f806b }
+.btn-primary { font-weight: 700 }
+.btn-outline-dark { font-weight: 700 }
+.hero-visual { background-color: #183044 }
+.hero-visual { border-radius: 1.5rem }
+.hero-visual { color: #fff }
+.hero-visual { box-shadow: 0 1.5rem 3rem rgba(24, 48, 68, .16) }
+.flow-step { background-color: rgba(255, 255, 255, .1) }
+.flow-step { border: 1px solid rgba(255, 255, 255, .16) }
+.flow-step { border-radius: 1rem }
+.flow-step { color: #fff }
+.flow-step { min-height: 88px }
+.flow-num { color: #a8e4bc }
+.flow-num { font-size: .76rem }
+.flow-num { font-weight: 800 }
+.section-kicker { color: #23836b }
+.section-kicker { font-size: .78rem }
+.section-kicker { font-weight: 800 }
+.section-kicker { letter-spacing: .12em }
+.section-title { color: #183044 }
+.section-title { font-weight: 800 }
+.section-lead { color: #607681 }
+.concept-card { background-color: #fff }
+.concept-card { border: 1px solid #e3eae4 }
+.concept-card { border-radius: 1.25rem }
+.concept-card { height: 100% }
+.concept-mark { background-color: #e6f3eb }
+.concept-mark { border-radius: 1rem }
+.concept-mark { color: #1c8067 }
+.concept-mark { font-size: 1.4rem }
+.concept-mark { font-weight: 800 }
+.mechanism-section { background-color: #edf2ef }
+.mechanism-card { background-color: #fff }
+.mechanism-card { border: 1px solid #dce6df }
+.mechanism-card { border-radius: 1.35rem }
+.mechanism-card { height: 100% }
+.mechanism-card { overflow: hidden }
+.mechanism-card { box-shadow: 0 .5rem 1.5rem rgba(24, 48, 68, .055) }
+.mechanism-card .card-body { padding: 1.4rem }
+.mechanism-number { color: #23836b }
+.mechanism-number { font-size: .78rem }
+.mechanism-number { font-weight: 900 }
+.mechanism-tag { background-color: #eff6f1 }
+.mechanism-tag { border-radius: 999px }
+.mechanism-tag { color: #26735f }
+.mechanism-tag { font-size: .76rem }
+.mechanism-tag { font-weight: 700 }
+.mechanism-card h3 { color: #183044 }
+.mechanism-card h3 { font-size: 1.35rem }
+.mechanism-card h3 { font-weight: 800 }
+.mechanism-card p { color: #5a707a }
+.game-frame { background-color: #132534 }
+.game-frame { border: 0 }
+.game-frame { border-radius: 0 0 1.2rem 1.2rem }
+.game-frame { width: 100% }
+.game-stage { position: relative }
+.game-stage { background-color: #132534 }
+.game-fullscreen { position: absolute }
+.game-fullscreen { top: .75rem }
+.game-fullscreen { right: .75rem }
+.game-fullscreen { z-index: 5 }
+.game-fullscreen { opacity: .95 }
+.game-stage:fullscreen { width: 100vw }
+.game-stage:fullscreen { height: 100vh }
+.game-stage:fullscreen { display: flex }
+.game-stage:fullscreen { align-items: center }
+.game-stage:fullscreen { justify-content: center }
+.game-stage:fullscreen .ratio { width: 100% }
+.game-stage:fullscreen .ratio { height: 100% }
+.game-stage:fullscreen .ratio::before { padding-top: 0 }
+.embed-note { color: #819097 }
+.embed-note { font-size: .82rem }
+#accountingMemoryGame { background-color: #142938 }
+#accountingMemoryGame canvas { display: block }
+#accountingMemoryGame canvas { width: 100% !important }
+#accountingMemoryGame canvas { height: 100% !important }
+.design-step { background-color: #fff }
+.design-step { border: 1px solid #e1e9e2 }
+.design-step { border-radius: 1.15rem }
+.design-step { height: 100% }
+.step-index { color: #25856c }
+.step-index { font-size: .8rem }
+.step-index { font-weight: 900 }
+.site-footer { background-color: #183044 }
+.site-footer { color: #d5e2e2 }
+.site-footer a { color: #a8e4bc }
+.site-footer a { text-decoration-thickness: 1px }
+.site-footer a { text-underline-offset: .2em }
+.small-label { color: #71848a }
+.small-label { font-size: .8rem }
+@media (max-width: 575.98px) {
+.hero h1 { font-size: 2.5rem }
+.mechanism-card .card-body { padding: 1.15rem }
+}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg border-bottom">
+<div class="container-xl py-2">
+<a class="navbar-brand d-flex align-items-center gap-2" href="#top"><span aria-hidden="true">✦</span><span>遊戲式學習設計指南</span></a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="開啟導覽選單"><span class="navbar-toggler-icon"></span></button>
+<div class="collapse navbar-collapse" id="mainNavigation"><div class="navbar-nav ms-auto gap-lg-2"><a class="nav-link" href="#about">認識遊戲式學習</a><a class="nav-link" href="#mechanisms">十種遊戲機制</a><a class="nav-link" href="#design">設計流程</a><a class="nav-link" href="#resources">參考資源</a></div></div>
+</div>
+</nav>
+<header class="hero" id="top">
+<div class="container-xl py-5"><div class="row align-items-center g-5 py-lg-4">
+<div class="col-lg-7">
+<div class="eyebrow text-uppercase mb-3">學習目標 × 遊戲體驗</div>
+<h1 class="display-3 lh-sm mb-4">讓學習變成<br>一場有意義的遊戲</h1>
+<p class="lead mb-4">從任務、選擇與回饋出發，認識遊戲式學習，並體驗十種可以轉化成課堂活動的遊戲機制。</p>
+<div class="d-flex flex-wrap gap-3"><a class="btn btn-primary btn-lg rounded-pill px-4" href="#mechanisms">探索十種機制</a><a class="btn btn-outline-dark btn-lg rounded-pill px-4" href="#about">了解核心概念</a></div>
+</div>
+<div class="col-lg-5"><div class="hero-visual p-4 p-lg-5">
+<div class="eyebrow text-uppercase mb-3">一段有效的學習體驗</div><h2 class="h3 fw-bold mb-4">讓每次行動都連回學習</h2>
+<div class="d-grid gap-3"><div class="flow-step p-3"><span class="flow-num d-block mb-1">第一步</span><strong>設定學習目標</strong></div><div class="flow-step p-3"><span class="flow-num d-block mb-1">第二步</span><strong>設計任務與選擇</strong></div><div class="flow-step p-3"><span class="flow-num d-block mb-1">第三步</span><strong>提供回饋並引導反思</strong></div></div>
+</div></div>
+</div></div>
+</header>
+<main>
+<section id="about" class="container-xl py-5">
+<div class="row align-items-end g-4 mb-4"><div class="col-lg-7"><div class="section-kicker text-uppercase mb-2">從遊戲走向理解</div><h2 class="section-title display-6 mb-0">什麼是遊戲式學習</h2></div><div class="col-lg-5"><p class="section-lead mb-0">遊戲不是課程的裝飾，而是讓學習者練習知識與技能的情境。</p></div></div>
+<div class="row g-4">
+<div class="col-lg-7"><article class="concept-card p-4 p-lg-5"><div class="concept-mark d-inline-flex align-items-center justify-content-center px-3 py-2 mb-3">核心概念</div><h3 class="h4 fw-bold">在遊戲中練習，在回饋中修正</h3><p class="text-secondary mb-0">遊戲式學習會把明確的學習目標融入任務情境、挑戰規則與回饋。學習者透過做選擇、採取行動、觀察結果，再說明自己的想法，逐步掌握知識並練習應用。</p></article></div>
+<div class="col-lg-5"><article class="concept-card p-4 p-lg-5"><div class="concept-mark d-inline-flex align-items-center justify-content-center px-3 py-2 mb-3">設計提醒</div><h3 class="h4 fw-bold">讓機制支持學習行為</h3><p class="text-secondary mb-0">點數和徽章可以增加回饋，但學習成效仍取決於目標、挑戰與反思是否互相連結。讓玩家說出理由，並把遊戲中的策略帶回真實問題。</p></article></div>
+</div>
+</section>
+<section id="mechanisms" class="mechanism-section py-5">
+<div class="container-xl">
+<div class="row align-items-end g-3 mb-4"><div class="col-lg-8"><div class="section-kicker text-uppercase mb-2">十種機制 × 十款 Phaser 範例</div><h2 class="section-title display-6 mb-2">把機制變成可體驗的學習</h2><p class="section-lead mb-0">每個遊戲都直接嵌入頁面。點選遊戲畫面後即可操作。</p></div><div class="col-lg-4 text-lg-end"><span class="small-label">範例由 Phaser 官方網站提供，載入需要網路</span></div></div>
+<div class="row g-4">
+<div class="col-lg-6"><article class="mechanism-card"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><span class="mechanism-number">機制 01</span><span class="mechanism-tag px-3 py-1">任務與進度</span></div><h3>目標任務與漸進挑戰</h3><p>把課程拆成清楚的小任務，讓學習者知道要完成什麼，再逐步提高難度。《First Game》透過移動、收集星星和避開炸彈呈現逐關挑戰。</p><div class="embed-note mb-2">操作提示 以方向鍵移動角色</div></div><div class="ratio ratio-4x3"><iframe class="game-frame" src="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cfirstgame%5Cpart10.js" title="Phaser First Game 平台挑戰範例" loading="lazy" allowfullscreen></iframe></div><div class="px-4 py-3"><a href="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cfirstgame%5Cpart10.js" target="_blank" rel="noopener">在官方範例頁開啟 First Game</a></div></article></div>
+<div class="col-lg-6"><article class="mechanism-card"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><span class="mechanism-number">機制 02</span><span class="mechanism-tag px-3 py-1">即時回饋</span></div><h3>分數與立即回饋</h3><p>行動一發生就呈現結果，有助於重複練習和自我檢查。《Coin Clicker》每次點擊金幣都會更新分數，可延伸成答題後即時回饋。</p><div class="embed-note mb-2">操作提示 點擊畫面中的金幣</div></div><div class="ratio ratio-4x3"><iframe class="game-frame" src="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Ccoin+clicker%5Cmain.js" title="Phaser Coin Clicker 點擊計分範例" loading="lazy" allowfullscreen></iframe></div><div class="px-4 py-3"><a href="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Ccoin+clicker%5Cmain.js" target="_blank" rel="noopener">在官方範例頁開啟 Coin Clicker</a></div></article></div>
+<div class="col-lg-6"><article class="mechanism-card"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><span class="mechanism-number">機制 03</span><span class="mechanism-tag px-3 py-1">收集與獎勵</span></div><h3>收集物件與成果獎勵</h3><p>玩家主動收集目標物件，同時避開障礙。《Avoid the Germs》展示收集與閃避並行的設計，可把物件換成知識線索、證據或技能徽章。</p><div class="embed-note mb-2">操作提示 用滑鼠移動角色並收集戒指</div></div><div class="ratio ratio-4x3"><iframe class="game-frame" src="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cavoid+the+germs%5CGame.js" title="Phaser Avoid the Germs 收集與閃避範例" loading="lazy" allowfullscreen></iframe></div><div class="px-4 py-3"><a href="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cavoid+the+germs%5CGame.js" target="_blank" rel="noopener">在官方範例頁開啟 Avoid the Germs</a></div></article></div>
+<div class="col-lg-6"><article class="mechanism-card"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><span class="mechanism-number">機制 04</span><span class="mechanism-tag px-3 py-1">主動回想</span></div><h3>會計知識王：選擇題對戰</h3><p>選擇難度後與電腦進行限時四選一。連續答對可累積倍率，答題後會顯示正確答案與會計解說。</p><div class="embed-note mb-2">操作提示 先選簡單、適中或困難，再點選你認為正確的答案</div></div><div class="ratio ratio-4x3"><div id="accountingMemoryGame" aria-label="會計知識王選擇題對戰遊戲"></div></div><div class="px-4 py-3 small text-secondary">學習目標 練習會計科目分類、借貸方向與交易分錄</div></article></div>
+<div class="col-lg-6"><article class="mechanism-card"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><span class="mechanism-number">機制 05</span><span class="mechanism-tag px-3 py-1">模式辨識</span></div><h3>分類觀察與快速配對</h3><p>觀察圖像線索、辨認相同特徵，再做出配對。《Emoji Match》提供限時配對體驗，可用來練習分類、辨識概念與比較異同。</p><div class="embed-note mb-2">操作提示 找出相同表情符號</div></div><div class="ratio ratio-4x3"><iframe class="game-frame" src="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cemoji+match%5Cmain.js" title="Phaser Emoji Match 模式辨識範例" loading="lazy" allowfullscreen></iframe></div><div class="px-4 py-3"><a href="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cemoji+match%5Cmain.js" target="_blank" rel="noopener">在官方範例頁開啟 Emoji Match</a></div></article></div>
+<div class="col-lg-6"><article class="mechanism-card"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><span class="mechanism-number">機制 06</span><span class="mechanism-tag px-3 py-1">邏輯推理</span></div><h3>線索判讀與假設驗證</h3><p>根據周邊線索推論安全位置，並用行動驗證假設。《Minesweeper》能延伸成資料判讀、邏輯規則或證據推理活動。</p><div class="embed-note mb-2">操作提示 點擊方格查看線索，右鍵標記</div></div><div class="ratio ratio-4x3"><iframe class="game-frame" src="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cminesweeper%5Cminesweeper.js" title="Phaser Minesweeper 線索推理範例" loading="lazy" allowfullscreen></iframe></div><div class="px-4 py-3"><a href="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cminesweeper%5Cminesweeper.js" target="_blank" rel="noopener">在官方範例頁開啟 Minesweeper</a></div></article></div>
+<div class="col-lg-6"><article class="mechanism-card"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><span class="mechanism-number">機制 07</span><span class="mechanism-tag px-3 py-1">有限步數</span></div><h3>限制條件與策略規劃</h3><p>在有限步數內完成目標，促使玩家預測結果並調整順序。《Flood Fill》要求選擇顏色填滿棋盤，適合帶入資源分配與策略規劃。</p><div class="embed-note mb-2">操作提示 選擇顏色擴展左上區域</div></div><div class="ratio ratio-4x3"><iframe class="game-frame" src="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cflood+fill%5Cflood-fill.js" title="Phaser Flood Fill 限步策略範例" loading="lazy" allowfullscreen></iframe></div><div class="px-4 py-3"><a href="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cflood+fill%5Cflood-fill.js" target="_blank" rel="noopener">在官方範例頁開啟 Flood Fill</a></div></article></div>
+<div class="col-lg-6"><article class="mechanism-card"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><span class="mechanism-number">機制 08</span><span class="mechanism-tag px-3 py-1">空間推理</span></div><h3>方位觀察與步驟預演</h3><p>判斷物件目前的位置，規劃移動順序並預測下一步。《Sliding Puzzle》可帶入圖像、地圖或流程排列，練習空間推理與程序思考。</p><div class="embed-note mb-2">操作提示 移動空格旁邊的拼圖方塊</div></div><div class="ratio ratio-4x3"><iframe class="game-frame" src="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Csliding+puzzle%5Cmain.js" title="Phaser Sliding Puzzle 空間推理範例" loading="lazy" allowfullscreen></iframe></div><div class="px-4 py-3"><a href="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Csliding+puzzle%5Cmain.js" target="_blank" rel="noopener">在官方範例頁開啟 Sliding Puzzle</a></div></article></div>
+<div class="col-lg-6"><article class="mechanism-card"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><span class="mechanism-number">機制 09</span><span class="mechanism-tag px-3 py-1">風險判斷</span></div><h3>選擇後果與風險評估</h3><p>每個決定都會帶來不同後果。《Bank Panic》要求辨識目標並避免誤傷無辜角色，可連結到證據檢查、風險評估與負責任的決策。</p><div class="embed-note mb-2">操作提示 觀察門口狀況再做選擇</div></div><div class="ratio ratio-4x3"><iframe class="game-frame" src="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cbank+panic%5Cmain.js" title="Phaser Bank Panic 風險決策範例" loading="lazy" allowfullscreen></iframe></div><div class="px-4 py-3"><a href="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cbank+panic%5Cmain.js" target="_blank" rel="noopener">在官方範例頁開啟 Bank Panic</a></div></article></div>
+<div class="col-lg-6"><article class="mechanism-card"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><span class="mechanism-number">機制 10</span><span class="mechanism-tag px-3 py-1">時機與精準度</span></div><h3>節奏控制與反覆精進</h3><p>抓準時機執行動作，觀察準確度如何影響成果。《Stacker》適合練習操作節奏、持續修正與從結果中精進策略。</p><div class="embed-note mb-2">操作提示 按空白鍵或點擊放下方塊</div></div><div class="ratio ratio-4x3"><iframe class="game-frame" src="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cstacker%5Cstacker.js" title="Phaser Stacker 時機與精準度範例" loading="lazy" allowfullscreen></iframe></div><div class="px-4 py-3"><a href="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cstacker%5Cstacker.js" target="_blank" rel="noopener">在官方範例頁開啟 Stacker</a></div></article></div>
+</div>
+</div>
+</section>
+<section id="design" class="container-xl py-5">
+<div class="section-kicker text-uppercase mb-2">把遊戲設計連回課程</div><h2 class="section-title display-6 mb-4">三步驟開始設計</h2>
+<div class="row g-4">
+<div class="col-md-4"><article class="design-step p-4"><div class="step-index mb-2">第一步</div><h3 class="h5 fw-bold">寫下可觀察的成果</h3><p class="text-secondary mb-0">說明學生完成活動後能辨認、解釋、計算或應用什麼。</p></article></div>
+<div class="col-md-4"><article class="design-step p-4"><div class="step-index mb-2">第二步</div><h3 class="h5 fw-bold">挑選支持目標的機制</h3><p class="text-secondary mb-0">記憶配對支持回想，線索推理支持分析，任務關卡支持逐步練習。</p></article></div>
+<div class="col-md-4"><article class="design-step p-4"><div class="step-index mb-2">第三步</div><h3 class="h5 fw-bold">安排回饋與課後反思</h3><p class="text-secondary mb-0">請學生說明策略、比較結果，再把所學應用到新的情境。</p></article></div>
+</div>
+</section>
+</main>
+<footer id="resources" class="site-footer py-5"><div class="container-xl"><div class="row g-4 align-items-start">
+<div class="col-lg-7"><div class="h5 fw-bold text-white">延伸探索</div><p class="mb-0">遊戲範例由 Phaser 官方範例網站提供，需連線載入。網站以 Bootstrap CDN 排版。</p></div>
+<div class="col-lg-5"><div class="d-flex flex-column gap-2"><a href="https://labs.phaser.io/phaser4-index.html?path=games" target="_blank" rel="noopener">Phaser 4 官方遊戲範例</a><a href="https://docs.phaser.io/phaser/concepts/physics/arcade" target="_blank" rel="noopener">Phaser Arcade Physics 文件</a><a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank" rel="noopener">Bootstrap CDN 說明</a></div></div>
+</div><div class="border-top border-secondary mt-4 pt-3 small">設計原則 讓挑戰、回饋與學習目標彼此對齊</div></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/phaser@4.2.1/dist/phaser.min.js"></script>
+<script>
+document.querySelectorAll(".ratio.ratio-4x3").forEach((frame) => {
+  const stage = document.createElement("div")
+  stage.className = "game-stage"
+  frame.parentNode.insertBefore(stage, frame)
+  stage.appendChild(frame)
+
+  const button = document.createElement("button")
+  button.type = "button"
+  button.className = "game-fullscreen btn btn-light btn-sm rounded-pill shadow"
+  button.textContent = "⛶ 全螢幕"
+  button.setAttribute("aria-label", "將這個遊戲放大至全螢幕")
+  button.setAttribute("aria-pressed", "false")
+
+  button.addEventListener("click", async () => {
+    try {
+      if (document.fullscreenElement === stage) {
+        await document.exitFullscreen()
+      } else {
+        await stage.requestFullscreen()
+      }
+    } catch {
+      button.textContent = "無法開啟全螢幕"
+    }
+  })
+
+  stage.appendChild(button)
+})
+
+document.addEventListener("fullscreenchange", () => {
+  document.querySelectorAll(".game-fullscreen").forEach((button) => {
+    const stage = button.closest(".game-stage")
+    const active = document.fullscreenElement === stage
+    button.textContent = active ? "離開全螢幕" : "⛶ 全螢幕"
+    button.setAttribute("aria-pressed", String(active))
+  })
+})
+
+const quizQuestions = {
+  simple: [
+    { prompt: "現金屬於哪一類會計要素？", choices: ["資產", "負債", "權益", "收入"], answer: 0, explanation: "現金是企業可以支用的資源，屬於資產。" },
+    { prompt: "應付帳款代表企業目前有什麼？", choices: ["尚未收回的款項", "尚未償還的付款義務", "業主投入的資本", "已賺得的收入"], answer: 1, explanation: "應付帳款通常來自賒購，表示企業尚未清償的負債。" },
+    { prompt: "業主投入現金 50,000 元，企業的資產與權益如何變動？", choices: ["資產增加，權益增加", "資產增加，負債增加", "資產減少，權益增加", "負債減少，權益增加"], answer: 0, explanation: "收到現金使資產增加，業主資本也使權益增加。" },
+    { prompt: "用現金支付本月店面租金，正確分錄是哪一個？", choices: ["借記租金費用，貸記現金", "借記現金，貸記租金費用", "借記應付帳款，貸記現金", "借記租金費用，貸記業主資本"], answer: 0, explanation: "租金費用增加記借方，現金減少記貸方。" },
+    { prompt: "銷貨收入增加時，通常記在哪一方？", choices: ["借方", "貸方", "借方或貸方都固定", "不需要記錄"], answer: 1, explanation: "收入的正常餘額在貸方，收入增加記貸方。" },
+    { prompt: "尚未出售的商品通常列為什麼？", choices: ["存貨資產", "銷貨收入", "租金費用", "應付帳款"], answer: 0, explanation: "準備出售的商品是存貨，屬於資產。" },
+    { prompt: "現金銷售商品 3,000 元，銷貨發生時的分錄為何？", choices: ["借記現金，貸記銷貨收入", "借記銷貨收入，貸記現金", "借記應收帳款，貸記現金", "借記存貨，貸記現金"], answer: 0, explanation: "收到現金使現金增加記借方，銷貨收入增加記貸方。" },
+    { prompt: "費用增加通常記在哪一方？", choices: ["借方", "貸方", "只記在資產負債表", "不影響權益"], answer: 0, explanation: "費用增加通常記借方，並會減少本期淨利與權益。" }
+  ],
+  moderate: [
+    { prompt: "賒購商品 12,000 元，採永續盤存制，應如何記錄？", choices: ["借記存貨，貸記應付帳款", "借記應付帳款，貸記存貨", "借記現金，貸記銷貨收入", "借記進貨，貸記現金"], answer: 0, explanation: "取得存貨使資產增加記借方，尚未付款形成應付帳款記貸方。" },
+    { prompt: "支付本月租金 8,000 元，正確分錄為何？", choices: ["借記租金費用，貸記現金", "借記現金，貸記租金收入", "借記預付租金，貸記應付帳款", "借記應付帳款，貸記租金費用"], answer: 0, explanation: "本月已發生的租金是費用，現金支付後減少。" },
+    { prompt: "收到客戶清償先前欠款 6,000 元，哪一組科目改變？", choices: ["借記現金，貸記應收帳款", "借記應收帳款，貸記現金", "借記現金，貸記銷貨收入", "借記應付帳款，貸記現金"], answer: 0, explanation: "現金增加記借方，客戶欠款減少使應收帳款記貸方。" },
+    { prompt: "以現金償還應付帳款 4,000 元，正確分錄為何？", choices: ["借記應付帳款，貸記現金", "借記現金，貸記應付帳款", "借記費用，貸記現金", "借記存貨，貸記銷貨收入"], answer: 0, explanation: "負債減少記借方，現金減少記貸方。" },
+    { prompt: "業主投入現金 80,000 元作為開業資金，應貸記哪個科目？", choices: ["現金", "業主資本", "銷貨收入", "應付帳款"], answer: 1, explanation: "現金增加記借方，業主資本增加記貸方。" },
+    { prompt: "賒銷商品給客戶 9,000 元，銷貨時的分錄為何？", choices: ["借記應收帳款，貸記銷貨收入", "借記銷貨收入，貸記應收帳款", "借記現金，貸記應付帳款", "借記存貨，貸記應收帳款"], answer: 0, explanation: "客戶尚未付款形成應收帳款，銷貨收入同時增加。" },
+    { prompt: "以現金購入設備 30,000 元，哪一組科目正確？", choices: ["借記設備，貸記現金", "借記現金，貸記設備", "借記設備費用，貸記銷貨收入", "借記應付帳款，貸記設備"], answer: 0, explanation: "設備增加記借方，現金減少記貸方。" },
+    { prompt: "下列哪一組科目增加時通常記借方？", choices: ["資產與費用", "負債與收入", "權益與收入", "負債與權益"], answer: 0, explanation: "資產、費用與業主提款增加時通常記借方。" },
+    { prompt: "先收到客戶訂金 5,000 元，商品尚未交付，應貸記什麼？", choices: ["預收收入", "銷貨收入", "租金費用", "應收帳款"], answer: 0, explanation: "尚未履約前，收到的訂金是預收款項，屬於負債。" },
+    { prompt: "以現金購入待售商品 7,000 元，採永續盤存制，分錄為何？", choices: ["借記存貨，貸記現金", "借記進貨，貸記應付帳款", "借記現金，貸記存貨", "借記銷貨成本，貸記銷貨收入"], answer: 0, explanation: "永續盤存制下購入商品直接增加存貨，支付現金則貸記現金。" }
+  ],
+  hard: [
+    { prompt: "預付未來六個月店租 36,000 元，付款當下應借記什麼？", choices: ["預付租金", "租金費用", "應付租金", "業主資本"], answer: 0, explanation: "尚未使用的租金服務仍是未來經濟效益，先列為預付費用資產。" },
+    { prompt: "月底已發生員工薪資 18,000 元，尚未支付，應如何調整？", choices: ["借記薪資費用，貸記應付薪資", "借記應付薪資，貸記薪資費用", "借記現金，貸記薪資收入", "借記預付薪資，貸記現金"], answer: 0, explanation: "薪資已經發生要認列費用，尚未支付的部分形成負債。" },
+    { prompt: "業主提領現金 6,000 元自用，應借記哪個科目？", choices: ["業主提款", "現金", "銷貨收入", "應付帳款"], answer: 0, explanation: "業主提款會減少業主權益，提款增加通常記借方。" },
+    { prompt: "賒銷商品 15,000 元給客戶，銷貨分錄的貸方是什麼？", choices: ["銷貨收入", "應收帳款", "現金", "存貨"], answer: 0, explanation: "賒銷使應收帳款增加記借方，銷貨收入增加記貸方。" },
+    { prompt: "客戶支付先前的欠款 11,000 元，這筆交易對收入的影響為何？", choices: ["不會再次增加收入", "收入增加 11,000 元", "費用增加 11,000 元", "權益減少 11,000 元"], answer: 0, explanation: "收入在賒銷時已經認列，收款只是在現金與應收帳款間轉換。" },
+    { prompt: "賒購辦公設備 40,000 元，交易當下的分錄為何？", choices: ["借記設備，貸記應付帳款", "借記應付帳款，貸記設備", "借記辦公費用，貸記銷貨收入", "借記現金，貸記設備"], answer: 0, explanation: "設備增加記借方，尚未付款形成應付帳款記貸方。" },
+    { prompt: "業主投入現金 100,000 元後，會計方程式如何維持平衡？", choices: ["資產與權益同額增加", "資產與負債同額增加", "負債減少且權益增加", "收入與費用同額增加"], answer: 0, explanation: "資產增加 100,000 元，業主權益也增加 100,000 元。" },
+    { prompt: "累計折舊通常具有哪一種正常餘額？", choices: ["貸方", "借方", "借貸兩方相同", "沒有餘額"], answer: 0, explanation: "累計折舊是資產抵減科目，通常具有貸方餘額。" },
+    { prompt: "本期認列租金費用會如何影響權益？", choices: ["使權益減少", "使權益增加", "不影響權益", "使負債必定增加"], answer: 0, explanation: "費用會減少本期淨利，因此降低業主權益。" },
+    { prompt: "企業資產 240,000 元，負債 90,000 元，權益是多少？", choices: ["150,000 元", "330,000 元", "90,000 元", "240,000 元"], answer: 0, explanation: "依資產等於負債加權益，權益為 240,000 減 90,000。" },
+    { prompt: "永續盤存制下，退回先前賒購的商品 2,000 元，應如何記錄？", choices: ["借記應付帳款，貸記存貨", "借記存貨，貸記應付帳款", "借記現金，貸記銷貨收入", "借記銷貨成本，貸記現金"], answer: 0, explanation: "退貨使對供應商的欠款減少，也使存貨減少。" },
+    { prompt: "收到現金提供服務 9,500 元，正確分錄為何？", choices: ["借記現金，貸記服務收入", "借記服務收入，貸記現金", "借記應收帳款，貸記現金", "借記現金，貸記應付帳款"], answer: 0, explanation: "收到現金使資產增加記借方，服務收入增加記貸方。" }
+  ]
+}
+
+const difficultySettings = {
+  simple: { name: "簡單", rounds: 8, seconds: 20, cpuAccuracy: 0.45, detail: "8 題，每題 20 秒，電腦命中率 45%" },
+  moderate: { name: "適中", rounds: 10, seconds: 16, cpuAccuracy: 0.65, detail: "10 題，每題 16 秒，電腦命中率 65%" },
+  hard: { name: "困難", rounds: 12, seconds: 12, cpuAccuracy: 0.82, detail: "12 題，每題 12 秒，電腦命中率 82%" }
+}
+
+const quizGame = new Phaser.Game({
+  type: Phaser.AUTO,
+  width: 960,
+  height: 720,
+  parent: "accountingMemoryGame",
+  backgroundColor: "#142938",
+  scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
+  scene: { create: createQuizGame }
+})
+
+function createQuizGame(data) {
+  const scene = this
+
+  if (!data || !data.difficulty) {
+    showQuizMenu(scene)
+    return
+  }
+
+  const difficulty = data.difficulty
+  const settings = difficultySettings[difficulty]
+  const questionList = quizQuestions[difficulty].slice().sort(() => Math.random() - 0.5).slice(0, settings.rounds)
+  const letters = ["A", "B", "C", "D"]
+  let questionIndex = 0
+  let currentQuestion
+  let playerScore = 0
+  let cpuScore = 0
+  let playerStreak = 0
+  let cpuStreak = 0
+  let bestPlayerStreak = 0
+  let timeLeft = settings.seconds
+  let roundLocked = true
+  let finished = false
+
+  scene.add.text(480, 34, "會計知識王", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "38px", color: "#f3f4df", fontStyle: "bold" }).setOrigin(0.5)
+  scene.add.text(480, 78, "玩家 VS 電腦", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "21px", color: "#a8c1c4" }).setOrigin(0.5)
+
+  const menuPanel = scene.add.rectangle(860, 78, 170, 44, 0x2c5b60).setStrokeStyle(2, 0x8bc9ae).setInteractive({ useHandCursor: true })
+  const menuLabel = scene.add.text(860, 78, "返回難度選擇", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "17px", color: "#ffffff", fontStyle: "bold" }).setOrigin(0.5)
+  menuPanel.on("pointerdown", () => scene.scene.restart())
+
+  scene.add.rectangle(250, 168, 340, 92, 0x1c3b4c).setStrokeStyle(2, 0x4a827b)
+  scene.add.rectangle(710, 168, 340, 92, 0x1c3b4c).setStrokeStyle(2, 0x4a827b)
+  scene.add.text(250, 140, "玩家", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "18px", color: "#a8c1c4" }).setOrigin(0.5)
+  scene.add.text(710, 140, "電腦對手", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "18px", color: "#a8c1c4" }).setOrigin(0.5)
+  const playerScoreText = scene.add.text(250, 170, "0 分", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "30px", color: "#f0d184", fontStyle: "bold" }).setOrigin(0.5)
+  const cpuScoreText = scene.add.text(710, 170, "0 分", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "30px", color: "#f0d184", fontStyle: "bold" }).setOrigin(0.5)
+  const playerStreakText = scene.add.text(250, 208, "連對 0 題，倍率 x1", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "17px", color: "#d4e8d5" }).setOrigin(0.5)
+  const cpuStreakText = scene.add.text(710, 208, "連對 0 題，倍率 x1", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "17px", color: "#d4e8d5" }).setOrigin(0.5)
+
+  const difficultyText = scene.add.text(95, 267, settings.name, { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "20px", color: "#f0d184", fontStyle: "bold" }).setOrigin(0.5)
+  const progressText = scene.add.text(480, 267, "第 1 題", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "20px", color: "#f3f4df", fontStyle: "bold" }).setOrigin(0.5)
+  const timerText = scene.add.text(860, 267, `倒數 ${settings.seconds} 秒`, { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "20px", color: "#f3f4df", fontStyle: "bold" }).setOrigin(0.5)
+  scene.add.rectangle(480, 355, 850, 160, 0x1c3b4c).setStrokeStyle(2, 0x4a827b)
+  const questionText = scene.add.text(480, 345, "", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "29px", color: "#ffffff", fontStyle: "bold", align: "center", wordWrap: { width: 790 } }).setOrigin(0.5)
+  const resultText = scene.add.text(480, 438, "", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "18px", color: "#a8e1c9", align: "center", wordWrap: { width: 840 } }).setOrigin(0.5)
+  const statusText = scene.add.text(480, 680, "選出答案後，電腦也會作答", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "17px", color: "#a8c1c4", align: "center", wordWrap: { width: 870 } }).setOrigin(0.5)
+
+  const optionPositions = [
+    { x: 265, y: 525 },
+    { x: 695, y: 525 },
+    { x: 265, y: 605 },
+    { x: 695, y: 605 }
+  ]
+  const optionPanels = optionPositions.map((position, index) => {
+    const panel = scene.add.rectangle(position.x, position.y, 400, 68, 0x24475a).setStrokeStyle(2, 0x628a83).setInteractive({ useHandCursor: true })
+    const label = scene.add.text(position.x, position.y, `${letters[index]}　`, { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "19px", color: "#f3f4df", align: "left", wordWrap: { width: 350 } }).setOrigin(0.5)
+    panel.on("pointerdown", () => answerQuestion(index))
+    panel.on("pointerover", () => {
+      if (!roundLocked) panel.setFillStyle(0x31586a)
+    })
+    panel.on("pointerout", () => {
+      if (!roundLocked) panel.setFillStyle(0x24475a)
+    })
+    return { panel, label }
+  })
+
+  const multiplierFor = (streak) => Math.max(1, Math.min(5, streak))
+  const updateScores = () => {
+    playerScoreText.setText(`${playerScore} 分`)
+    cpuScoreText.setText(`${cpuScore} 分`)
+    playerStreakText.setText(`連對 ${playerStreak} 題，倍率 x${multiplierFor(playerStreak)}`)
+    cpuStreakText.setText(`連對 ${cpuStreak} 題，倍率 x${multiplierFor(cpuStreak)}`)
+  }
+
+  const showResults = () => {
+    finished = true
+    roundLocked = true
+    optionPanels.forEach((option) => option.panel.disableInteractive())
+    questionText.setText("本場對戰結束")
+    resultText.setColor("#f0d184")
+    const winner = playerScore > cpuScore ? "恭喜你獲勝" : playerScore < cpuScore ? "電腦獲勝，再挑戰一次" : "雙方平手，再挑戰一次"
+    resultText.setText(`${winner}，你的最高連對紀錄是 ${bestPlayerStreak} 題。`)
+    statusText.setText(`最終比分　玩家 ${playerScore} 分　對上　電腦 ${cpuScore} 分`)
+    menuLabel.setText("再選一個難度")
+  }
+
+  const loadQuestion = () => {
+    if (questionIndex >= questionList.length) {
+      showResults()
+      return
+    }
+
+    currentQuestion = questionList[questionIndex]
+    timeLeft = settings.seconds
+    roundLocked = false
+    progressText.setText(`第 ${questionIndex + 1} 題，共 ${questionList.length} 題`)
+    timerText.setColor("#f3f4df")
+    timerText.setText(`倒數 ${timeLeft} 秒`)
+    questionText.setText(currentQuestion.prompt)
+    resultText.setText("")
+    statusText.setText("選出答案後，電腦也會作答")
+
+    optionPanels.forEach((option, index) => {
+      option.panel.setFillStyle(0x24475a)
+      option.panel.setStrokeStyle(2, 0x628a83)
+      option.panel.setInteractive({ useHandCursor: true })
+      option.label.setText(`${letters[index]}　${currentQuestion.choices[index]}`)
+    })
+  }
+
+  const answerQuestion = (playerChoice) => {
+    if (roundLocked || finished) return
+    roundLocked = true
+    statusText.setText("你已作答，電腦正在思考")
+
+    scene.time.delayedCall(850, () => {
+      const cpuCorrect = Math.random() < settings.cpuAccuracy
+      const wrongAnswers = currentQuestion.choices.map((option, index) => index).filter((index) => index !== currentQuestion.answer)
+      const cpuChoice = cpuCorrect ? currentQuestion.answer : wrongAnswers[Math.floor(Math.random() * wrongAnswers.length)]
+      const playerCorrect = playerChoice === currentQuestion.answer
+      let playerPoints = 0
+      let cpuPoints = 0
+
+      if (playerCorrect) {
+        playerStreak += 1
+        bestPlayerStreak = Math.max(bestPlayerStreak, playerStreak)
+        playerPoints = 100 * multiplierFor(playerStreak)
+        playerScore += playerPoints
+      } else {
+        playerStreak = 0
+      }
+
+      if (cpuCorrect) {
+        cpuStreak += 1
+        cpuPoints = 100 * multiplierFor(cpuStreak)
+        cpuScore += cpuPoints
+      } else {
+        cpuStreak = 0
+      }
+
+      optionPanels.forEach((option, index) => {
+        option.panel.disableInteractive()
+        if (index === currentQuestion.answer) {
+          option.panel.setFillStyle(0x235849)
+          option.panel.setStrokeStyle(3, 0x8bd3a8)
+        } else if (index === playerChoice) {
+          option.panel.setFillStyle(0x713f46)
+          option.panel.setStrokeStyle(3, 0xffa9a9)
+        } else {
+          option.panel.setFillStyle(0x24475a)
+          option.panel.setStrokeStyle(2, 0x628a83)
+        }
+
+        if (index === cpuChoice && !cpuCorrect) option.panel.setStrokeStyle(3, 0xf0d184)
+      })
+
+      updateScores()
+      resultText.setColor("#a8e1c9")
+      resultText.setText(`正確答案 ${letters[currentQuestion.answer]}。${currentQuestion.explanation}`)
+      const playerMessage = playerChoice === -1 ? "你逾時未答" : playerCorrect ? `你答對，獲得 ${playerPoints} 分` : "你答錯，連對中斷"
+      const cpuMessage = cpuCorrect ? `電腦答對，獲得 ${cpuPoints} 分` : "電腦答錯"
+      statusText.setText(`${playerMessage}。${cpuMessage}。黃色外框是電腦選項。`)
+
+      scene.time.delayedCall(2700, () => {
+        if (finished) return
+        questionIndex += 1
+        loadQuestion()
+      })
+    })
+  }
+
+  scene.time.addEvent({
+    delay: 1000,
+    loop: true,
+    callback: () => {
+      if (roundLocked || finished) return
+      timeLeft -= 1
+      timerText.setText(`倒數 ${timeLeft} 秒`)
+      if (timeLeft <= 5) timerText.setColor("#ffad91")
+      if (timeLeft <= 0) answerQuestion(-1)
+    }
+  })
+
+  loadQuestion()
+}
+
+function showQuizMenu(scene) {
+  scene.add.text(480, 78, "會計知識王", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "46px", color: "#f3f4df", fontStyle: "bold" }).setOrigin(0.5)
+  scene.add.text(480, 140, "玩家 VS 電腦　會計選擇題挑戰", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "24px", color: "#a8c1c4" }).setOrigin(0.5)
+  scene.add.text(480, 205, "每題答對可得 100 分，連續答對時倍率逐題上升，最高 x5", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "20px", color: "#f0d184", align: "center", wordWrap: { width: 820 } }).setOrigin(0.5)
+
+  const levels = [
+    { id: "simple", x: 180, color: 0x2c5b60, name: "簡單", detail: "8 題，每題 20 秒\n電腦命中率 45%" },
+    { id: "moderate", x: 480, color: 0x356477, name: "適中", detail: "10 題，每題 16 秒\n電腦命中率 65%" },
+    { id: "hard", x: 780, color: 0x704d49, name: "困難", detail: "12 題，每題 12 秒\n電腦命中率 82%" }
+  ]
+
+  levels.forEach((level) => {
+    const panel = scene.add.rectangle(level.x, 405, 260, 230, level.color).setStrokeStyle(3, 0x8bc9ae).setInteractive({ useHandCursor: true })
+    const title = scene.add.text(level.x, 354, level.name, { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "34px", color: "#ffffff", fontStyle: "bold" }).setOrigin(0.5)
+    const detail = scene.add.text(level.x, 430, level.detail, { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "21px", color: "#e8f1e8", align: "center", lineSpacing: 10 }).setOrigin(0.5)
+    const action = scene.add.text(level.x, 488, "點擊開始對戰", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "18px", color: "#f0d184", fontStyle: "bold" }).setOrigin(0.5)
+    panel.on("pointerover", () => panel.setScale(1.03))
+    panel.on("pointerout", () => panel.setScale(1))
+    panel.on("pointerdown", () => scene.scene.restart({ difficulty: level.id }))
+    title.setInteractive({ useHandCursor: true }).on("pointerdown", () => scene.scene.restart({ difficulty: level.id }))
+    detail.setInteractive({ useHandCursor: true }).on("pointerdown", () => scene.scene.restart({ difficulty: level.id }))
+    action.setInteractive({ useHandCursor: true }).on("pointerdown", () => scene.scene.restart({ difficulty: level.id }))
+  })
+
+  scene.add.text(480, 580, "選項包含科目分類、借貸方向與會計分錄，答題後會公布答案與解說", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "18px", color: "#a8c1c4", align: "center", wordWrap: { width: 850 } }).setOrigin(0.5)
+}
+</script>
+</body>
+</html>

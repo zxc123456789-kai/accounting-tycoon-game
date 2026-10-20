@@ -2,6 +2,11 @@
 
 以 Phaser 3.90 製作的高職會計分錄練習遊戲。遊戲使用 Phaser 的 Graphics API 繪製商店和互動元件，不需要額外圖檔。
 
+## GitHub Pages
+
+- [Accounting Tycoon](https://zxc123456789-kai.github.io/accounting-tycoon-game/)
+- [遊戲式學習設計指南與會計知識王](https://zxc123456789-kai.github.io/accounting-tycoon-game/game-learning.html)
+
 ## 開始遊玩
 
 用瀏覽器開啟 `index.html`。頁面會從 cdnjs 載入 Phaser 3.90，因此遊玩時需要網路連線。
