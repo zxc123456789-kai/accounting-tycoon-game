@@ -3,231 +3,89 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f5f7f4">
-<title>遊戲式學習設計指南</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<meta name="theme-color" content="#142938">
+<title>會計知識王｜機制 04 遊戲</title>
 <style>
-html { overflow-y: scroll }
-body { padding-left: calc(100vw - 100%) }
-body { background-color: #f5f7f4 }
-body { color: #183044 }
-body { font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif }
-.navbar { position: static }
-.navbar-brand { color: #183044 }
-.navbar-brand { font-weight: 800 }
-.nav-link { color: #476171 }
-.nav-link { font-weight: 600 }
-.hero { background-color: #eaf4ee }
-.hero { background-image: radial-gradient(circle at 12% 8%, #d6eee1 0, transparent 34%), linear-gradient(135deg, #eef6f1, #f7f4eb) }
-.hero { border-bottom: 1px solid #dce8df }
-.eyebrow { color: #23836b }
-.eyebrow { font-size: .78rem }
-.eyebrow { font-weight: 800 }
-.eyebrow { letter-spacing: .12em }
-.hero h1 { color: #142d40 }
-.hero h1 { font-size: clamp(2.3rem, 5vw, 4.6rem) }
-.hero h1 { font-weight: 850 }
-.hero h1 { letter-spacing: -.04em }
-.hero p { color: #4a6571 }
-.hero p { font-size: 1.12rem }
-.btn-primary { background-color: #1f806b }
-.btn-primary { border-color: #1f806b }
-.btn-primary { font-weight: 700 }
-.btn-outline-dark { font-weight: 700 }
-.hero-visual { background-color: #183044 }
-.hero-visual { border-radius: 1.5rem }
-.hero-visual { color: #fff }
-.hero-visual { box-shadow: 0 1.5rem 3rem rgba(24, 48, 68, .16) }
-.flow-step { background-color: rgba(255, 255, 255, .1) }
-.flow-step { border: 1px solid rgba(255, 255, 255, .16) }
-.flow-step { border-radius: 1rem }
-.flow-step { color: #fff }
-.flow-step { min-height: 88px }
-.flow-num { color: #a8e4bc }
-.flow-num { font-size: .76rem }
-.flow-num { font-weight: 800 }
-.section-kicker { color: #23836b }
-.section-kicker { font-size: .78rem }
-.section-kicker { font-weight: 800 }
-.section-kicker { letter-spacing: .12em }
-.section-title { color: #183044 }
-.section-title { font-weight: 800 }
-.section-lead { color: #607681 }
-.concept-card { background-color: #fff }
-.concept-card { border: 1px solid #e3eae4 }
-.concept-card { border-radius: 1.25rem }
-.concept-card { height: 100% }
-.concept-mark { background-color: #e6f3eb }
-.concept-mark { border-radius: 1rem }
-.concept-mark { color: #1c8067 }
-.concept-mark { font-size: 1.4rem }
-.concept-mark { font-weight: 800 }
-.mechanism-section { background-color: #edf2ef }
-.mechanism-card { background-color: #fff }
-.mechanism-card { border: 1px solid #dce6df }
-.mechanism-card { border-radius: 1.35rem }
-.mechanism-card { height: 100% }
-.mechanism-card { overflow: hidden }
-.mechanism-card { box-shadow: 0 .5rem 1.5rem rgba(24, 48, 68, .055) }
-.mechanism-card .card-body { padding: 1.4rem }
-.mechanism-number { color: #23836b }
-.mechanism-number { font-size: .78rem }
-.mechanism-number { font-weight: 900 }
-.mechanism-tag { background-color: #eff6f1 }
-.mechanism-tag { border-radius: 999px }
-.mechanism-tag { color: #26735f }
-.mechanism-tag { font-size: .76rem }
-.mechanism-tag { font-weight: 700 }
-.mechanism-card h3 { color: #183044 }
-.mechanism-card h3 { font-size: 1.35rem }
-.mechanism-card h3 { font-weight: 800 }
-.mechanism-card p { color: #5a707a }
-.game-frame { background-color: #132534 }
-.game-frame { border: 0 }
-.game-frame { border-radius: 0 0 1.2rem 1.2rem }
-.game-frame { width: 100% }
+* { box-sizing: border-box }
+html { min-height: 100% }
+body { margin: 0 }
+body { min-height: 100vh }
+body { display: flex }
+body { flex-direction: column }
+body { align-items: center }
+body { background-color: #0c1c29 }
+body { color: #f3f4df }
+body { font-family: "Microsoft JhengHei", sans-serif }
+.page-header { padding: 18px 20px 8px }
+.page-header { text-align: center }
+.page-header p { margin: 0 0 4px }
+.page-header p { color: #a8c1c4 }
+.page-header h1 { margin: 0 }
+.page-header h1 { font-size: clamp(22px, 4vw, 32px) }
+.page-header h1 { color: #f0d184 }
+.page-main { width: 100% }
+.page-main { display: grid }
+.page-main { place-items: center }
+.page-main { padding: 8px 16px 20px }
 .game-stage { position: relative }
-.game-stage { background-color: #132534 }
-.game-fullscreen { position: absolute }
-.game-fullscreen { top: .75rem }
-.game-fullscreen { right: .75rem }
-.game-fullscreen { z-index: 5 }
-.game-fullscreen { opacity: .95 }
-.game-stage:fullscreen { width: 100vw }
-.game-stage:fullscreen { height: 100vh }
-.game-stage:fullscreen { display: flex }
-.game-stage:fullscreen { align-items: center }
-.game-stage:fullscreen { justify-content: center }
-.game-stage:fullscreen .ratio { width: 100% }
-.game-stage:fullscreen .ratio { height: 100% }
-.game-stage:fullscreen .ratio::before { padding-top: 0 }
-.embed-note { color: #819097 }
-.embed-note { font-size: .82rem }
-#accountingMemoryGame { background-color: #142938 }
+.game-stage { width: min(100%, 960px) }
+.game-stage { aspect-ratio: 4 / 3 }
+.game-stage { overflow: hidden }
+.game-stage { border: 1px solid #42666e }
+.game-stage { border-radius: 18px }
+.game-stage { background-color: #142938 }
+#accountingMemoryGame { width: 100% }
+#accountingMemoryGame { height: 100% }
 #accountingMemoryGame canvas { display: block }
 #accountingMemoryGame canvas { width: 100% !important }
 #accountingMemoryGame canvas { height: 100% !important }
-.design-step { background-color: #fff }
-.design-step { border: 1px solid #e1e9e2 }
-.design-step { border-radius: 1.15rem }
-.design-step { height: 100% }
-.step-index { color: #25856c }
-.step-index { font-size: .8rem }
-.step-index { font-weight: 900 }
-.site-footer { background-color: #183044 }
-.site-footer { color: #d5e2e2 }
-.site-footer a { color: #a8e4bc }
-.site-footer a { text-decoration-thickness: 1px }
-.site-footer a { text-underline-offset: .2em }
-.small-label { color: #71848a }
-.small-label { font-size: .8rem }
-@media (max-width: 575.98px) {
-.hero h1 { font-size: 2.5rem }
-.mechanism-card .card-body { padding: 1.15rem }
+.fullscreen-button { position: absolute }
+.fullscreen-button { top: 12px }
+.fullscreen-button { right: 12px }
+.fullscreen-button { z-index: 5 }
+.fullscreen-button { padding: 8px 14px }
+.fullscreen-button { border: 1px solid #8bc9ae }
+.fullscreen-button { border-radius: 999px }
+.fullscreen-button { background-color: #f3f4df }
+.fullscreen-button { color: #183044 }
+.fullscreen-button { font: inherit }
+.fullscreen-button { font-weight: 700 }
+.fullscreen-button { cursor: pointer }
+.game-stage:fullscreen { width: 100vw }
+.game-stage:fullscreen { height: 100vh }
+.game-stage:fullscreen { display: grid }
+.game-stage:fullscreen { place-items: center }
+.game-stage:fullscreen { border: 0 }
+.game-stage:fullscreen { border-radius: 0 }
+.game-stage:fullscreen #accountingMemoryGame { width: 100% }
+.game-stage:fullscreen #accountingMemoryGame { height: 100% }
+.page-hint { margin: 8px 0 0 }
+.page-hint { color: #a8c1c4 }
+.page-hint { font-size: 14px }
+@media (max-width: 600px) {
+  .page-header { padding-top: 10px }
+  .page-main { padding: 4px 8px 12px }
+  .game-stage { border-radius: 10px }
+  .fullscreen-button { top: 7px }
+  .fullscreen-button { right: 7px }
+  .fullscreen-button { padding: 6px 10px }
 }
 </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg border-bottom">
-<div class="container-xl py-2">
-<a class="navbar-brand d-flex align-items-center gap-2" href="#top"><span aria-hidden="true">✦</span><span>遊戲式學習設計指南</span></a>
-<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="開啟導覽選單"><span class="navbar-toggler-icon"></span></button>
-<div class="collapse navbar-collapse" id="mainNavigation"><div class="navbar-nav ms-auto gap-lg-2"><a class="nav-link" href="#about">認識遊戲式學習</a><a class="nav-link" href="#mechanisms">十種遊戲機制</a><a class="nav-link" href="#design">設計流程</a><a class="nav-link" href="#resources">參考資源</a></div></div>
-</div>
-</nav>
-<header class="hero" id="top">
-<div class="container-xl py-5"><div class="row align-items-center g-5 py-lg-4">
-<div class="col-lg-7">
-<div class="eyebrow text-uppercase mb-3">學習目標 × 遊戲體驗</div>
-<h1 class="display-3 lh-sm mb-4">讓學習變成<br>一場有意義的遊戲</h1>
-<p class="lead mb-4">從任務、選擇與回饋出發，認識遊戲式學習，並體驗十種可以轉化成課堂活動的遊戲機制。</p>
-<div class="d-flex flex-wrap gap-3"><a class="btn btn-primary btn-lg rounded-pill px-4" href="#mechanisms">探索十種機制</a><a class="btn btn-outline-dark btn-lg rounded-pill px-4" href="#about">了解核心概念</a></div>
-</div>
-<div class="col-lg-5"><div class="hero-visual p-4 p-lg-5">
-<div class="eyebrow text-uppercase mb-3">一段有效的學習體驗</div><h2 class="h3 fw-bold mb-4">讓每次行動都連回學習</h2>
-<div class="d-grid gap-3"><div class="flow-step p-3"><span class="flow-num d-block mb-1">第一步</span><strong>設定學習目標</strong></div><div class="flow-step p-3"><span class="flow-num d-block mb-1">第二步</span><strong>設計任務與選擇</strong></div><div class="flow-step p-3"><span class="flow-num d-block mb-1">第三步</span><strong>提供回饋並引導反思</strong></div></div>
-</div></div>
-</div></div>
+<header class="page-header">
+<p>機制 04　主動回想</p>
+<h1>會計科目與分錄知識挑戰</h1>
 </header>
-<main>
-<section id="about" class="container-xl py-5">
-<div class="row align-items-end g-4 mb-4"><div class="col-lg-7"><div class="section-kicker text-uppercase mb-2">從遊戲走向理解</div><h2 class="section-title display-6 mb-0">什麼是遊戲式學習</h2></div><div class="col-lg-5"><p class="section-lead mb-0">遊戲不是課程的裝飾，而是讓學習者練習知識與技能的情境。</p></div></div>
-<div class="row g-4">
-<div class="col-lg-7"><article class="concept-card p-4 p-lg-5"><div class="concept-mark d-inline-flex align-items-center justify-content-center px-3 py-2 mb-3">核心概念</div><h3 class="h4 fw-bold">在遊戲中練習，在回饋中修正</h3><p class="text-secondary mb-0">遊戲式學習會把明確的學習目標融入任務情境、挑戰規則與回饋。學習者透過做選擇、採取行動、觀察結果，再說明自己的想法，逐步掌握知識並練習應用。</p></article></div>
-<div class="col-lg-5"><article class="concept-card p-4 p-lg-5"><div class="concept-mark d-inline-flex align-items-center justify-content-center px-3 py-2 mb-3">設計提醒</div><h3 class="h4 fw-bold">讓機制支持學習行為</h3><p class="text-secondary mb-0">點數和徽章可以增加回饋，但學習成效仍取決於目標、挑戰與反思是否互相連結。讓玩家說出理由，並把遊戲中的策略帶回真實問題。</p></article></div>
+<main class="page-main">
+<div id="gameStage" class="game-stage">
+<div id="accountingMemoryGame" aria-label="會計知識王選擇題對戰遊戲"></div>
+<button id="fullscreenButton" class="fullscreen-button" type="button">⛶ 全螢幕</button>
 </div>
-</section>
-<section id="mechanisms" class="mechanism-section py-5">
-<div class="container-xl">
-<div class="row align-items-end g-3 mb-4"><div class="col-lg-8"><div class="section-kicker text-uppercase mb-2">十種機制 × 十款 Phaser 範例</div><h2 class="section-title display-6 mb-2">把機制變成可體驗的學習</h2><p class="section-lead mb-0">每個遊戲都直接嵌入頁面。點選遊戲畫面後即可操作。</p></div><div class="col-lg-4 text-lg-end"><span class="small-label">範例由 Phaser 官方網站提供，載入需要網路</span></div></div>
-<div class="row g-4">
-<div class="col-lg-6"><article class="mechanism-card"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><span class="mechanism-number">機制 01</span><span class="mechanism-tag px-3 py-1">任務與進度</span></div><h3>目標任務與漸進挑戰</h3><p>把課程拆成清楚的小任務，讓學習者知道要完成什麼，再逐步提高難度。《First Game》透過移動、收集星星和避開炸彈呈現逐關挑戰。</p><div class="embed-note mb-2">操作提示 以方向鍵移動角色</div></div><div class="ratio ratio-4x3"><iframe class="game-frame" src="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cfirstgame%5Cpart10.js" title="Phaser First Game 平台挑戰範例" loading="lazy" allowfullscreen></iframe></div><div class="px-4 py-3"><a href="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cfirstgame%5Cpart10.js" target="_blank" rel="noopener">在官方範例頁開啟 First Game</a></div></article></div>
-<div class="col-lg-6"><article class="mechanism-card"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><span class="mechanism-number">機制 02</span><span class="mechanism-tag px-3 py-1">即時回饋</span></div><h3>分數與立即回饋</h3><p>行動一發生就呈現結果，有助於重複練習和自我檢查。《Coin Clicker》每次點擊金幣都會更新分數，可延伸成答題後即時回饋。</p><div class="embed-note mb-2">操作提示 點擊畫面中的金幣</div></div><div class="ratio ratio-4x3"><iframe class="game-frame" src="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Ccoin+clicker%5Cmain.js" title="Phaser Coin Clicker 點擊計分範例" loading="lazy" allowfullscreen></iframe></div><div class="px-4 py-3"><a href="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Ccoin+clicker%5Cmain.js" target="_blank" rel="noopener">在官方範例頁開啟 Coin Clicker</a></div></article></div>
-<div class="col-lg-6"><article class="mechanism-card"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><span class="mechanism-number">機制 03</span><span class="mechanism-tag px-3 py-1">收集與獎勵</span></div><h3>收集物件與成果獎勵</h3><p>玩家主動收集目標物件，同時避開障礙。《Avoid the Germs》展示收集與閃避並行的設計，可把物件換成知識線索、證據或技能徽章。</p><div class="embed-note mb-2">操作提示 用滑鼠移動角色並收集戒指</div></div><div class="ratio ratio-4x3"><iframe class="game-frame" src="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cavoid+the+germs%5CGame.js" title="Phaser Avoid the Germs 收集與閃避範例" loading="lazy" allowfullscreen></iframe></div><div class="px-4 py-3"><a href="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cavoid+the+germs%5CGame.js" target="_blank" rel="noopener">在官方範例頁開啟 Avoid the Germs</a></div></article></div>
-<div class="col-lg-6"><article class="mechanism-card"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><span class="mechanism-number">機制 04</span><span class="mechanism-tag px-3 py-1">主動回想</span></div><h3>會計知識王：選擇題對戰</h3><p>選擇難度後與電腦進行限時四選一。連續答對可累積倍率，答題後會顯示正確答案與會計解說。</p><div class="embed-note mb-2">操作提示 先選簡單、適中或困難，再點選你認為正確的答案</div></div><div class="ratio ratio-4x3"><div id="accountingMemoryGame" aria-label="會計知識王選擇題對戰遊戲"></div></div><div class="px-4 py-3 small text-secondary">學習目標 練習會計科目分類、借貸方向與交易分錄</div></article></div>
-<div class="col-lg-6"><article class="mechanism-card"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><span class="mechanism-number">機制 05</span><span class="mechanism-tag px-3 py-1">模式辨識</span></div><h3>分類觀察與快速配對</h3><p>觀察圖像線索、辨認相同特徵，再做出配對。《Emoji Match》提供限時配對體驗，可用來練習分類、辨識概念與比較異同。</p><div class="embed-note mb-2">操作提示 找出相同表情符號</div></div><div class="ratio ratio-4x3"><iframe class="game-frame" src="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cemoji+match%5Cmain.js" title="Phaser Emoji Match 模式辨識範例" loading="lazy" allowfullscreen></iframe></div><div class="px-4 py-3"><a href="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cemoji+match%5Cmain.js" target="_blank" rel="noopener">在官方範例頁開啟 Emoji Match</a></div></article></div>
-<div class="col-lg-6"><article class="mechanism-card"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><span class="mechanism-number">機制 06</span><span class="mechanism-tag px-3 py-1">邏輯推理</span></div><h3>線索判讀與假設驗證</h3><p>根據周邊線索推論安全位置，並用行動驗證假設。《Minesweeper》能延伸成資料判讀、邏輯規則或證據推理活動。</p><div class="embed-note mb-2">操作提示 點擊方格查看線索，右鍵標記</div></div><div class="ratio ratio-4x3"><iframe class="game-frame" src="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cminesweeper%5Cminesweeper.js" title="Phaser Minesweeper 線索推理範例" loading="lazy" allowfullscreen></iframe></div><div class="px-4 py-3"><a href="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cminesweeper%5Cminesweeper.js" target="_blank" rel="noopener">在官方範例頁開啟 Minesweeper</a></div></article></div>
-<div class="col-lg-6"><article class="mechanism-card"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><span class="mechanism-number">機制 07</span><span class="mechanism-tag px-3 py-1">有限步數</span></div><h3>限制條件與策略規劃</h3><p>在有限步數內完成目標，促使玩家預測結果並調整順序。《Flood Fill》要求選擇顏色填滿棋盤，適合帶入資源分配與策略規劃。</p><div class="embed-note mb-2">操作提示 選擇顏色擴展左上區域</div></div><div class="ratio ratio-4x3"><iframe class="game-frame" src="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cflood+fill%5Cflood-fill.js" title="Phaser Flood Fill 限步策略範例" loading="lazy" allowfullscreen></iframe></div><div class="px-4 py-3"><a href="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cflood+fill%5Cflood-fill.js" target="_blank" rel="noopener">在官方範例頁開啟 Flood Fill</a></div></article></div>
-<div class="col-lg-6"><article class="mechanism-card"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><span class="mechanism-number">機制 08</span><span class="mechanism-tag px-3 py-1">空間推理</span></div><h3>方位觀察與步驟預演</h3><p>判斷物件目前的位置，規劃移動順序並預測下一步。《Sliding Puzzle》可帶入圖像、地圖或流程排列，練習空間推理與程序思考。</p><div class="embed-note mb-2">操作提示 移動空格旁邊的拼圖方塊</div></div><div class="ratio ratio-4x3"><iframe class="game-frame" src="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Csliding+puzzle%5Cmain.js" title="Phaser Sliding Puzzle 空間推理範例" loading="lazy" allowfullscreen></iframe></div><div class="px-4 py-3"><a href="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Csliding+puzzle%5Cmain.js" target="_blank" rel="noopener">在官方範例頁開啟 Sliding Puzzle</a></div></article></div>
-<div class="col-lg-6"><article class="mechanism-card"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><span class="mechanism-number">機制 09</span><span class="mechanism-tag px-3 py-1">風險判斷</span></div><h3>選擇後果與風險評估</h3><p>每個決定都會帶來不同後果。《Bank Panic》要求辨識目標並避免誤傷無辜角色，可連結到證據檢查、風險評估與負責任的決策。</p><div class="embed-note mb-2">操作提示 觀察門口狀況再做選擇</div></div><div class="ratio ratio-4x3"><iframe class="game-frame" src="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cbank+panic%5Cmain.js" title="Phaser Bank Panic 風險決策範例" loading="lazy" allowfullscreen></iframe></div><div class="px-4 py-3"><a href="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cbank+panic%5Cmain.js" target="_blank" rel="noopener">在官方範例頁開啟 Bank Panic</a></div></article></div>
-<div class="col-lg-6"><article class="mechanism-card"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><span class="mechanism-number">機制 10</span><span class="mechanism-tag px-3 py-1">時機與精準度</span></div><h3>節奏控制與反覆精進</h3><p>抓準時機執行動作，觀察準確度如何影響成果。《Stacker》適合練習操作節奏、持續修正與從結果中精進策略。</p><div class="embed-note mb-2">操作提示 按空白鍵或點擊放下方塊</div></div><div class="ratio ratio-4x3"><iframe class="game-frame" src="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cstacker%5Cstacker.js" title="Phaser Stacker 時機與精準度範例" loading="lazy" allowfullscreen></iframe></div><div class="px-4 py-3"><a href="https://labs.phaser.io/phaser4-view.html?src=src%5Cgames%5Cstacker%5Cstacker.js" target="_blank" rel="noopener">在官方範例頁開啟 Stacker</a></div></article></div>
-</div>
-</div>
-</section>
-<section id="design" class="container-xl py-5">
-<div class="section-kicker text-uppercase mb-2">把遊戲設計連回課程</div><h2 class="section-title display-6 mb-4">三步驟開始設計</h2>
-<div class="row g-4">
-<div class="col-md-4"><article class="design-step p-4"><div class="step-index mb-2">第一步</div><h3 class="h5 fw-bold">寫下可觀察的成果</h3><p class="text-secondary mb-0">說明學生完成活動後能辨認、解釋、計算或應用什麼。</p></article></div>
-<div class="col-md-4"><article class="design-step p-4"><div class="step-index mb-2">第二步</div><h3 class="h5 fw-bold">挑選支持目標的機制</h3><p class="text-secondary mb-0">記憶配對支持回想，線索推理支持分析，任務關卡支持逐步練習。</p></article></div>
-<div class="col-md-4"><article class="design-step p-4"><div class="step-index mb-2">第三步</div><h3 class="h5 fw-bold">安排回饋與課後反思</h3><p class="text-secondary mb-0">請學生說明策略、比較結果，再把所學應用到新的情境。</p></article></div>
-</div>
-</section>
+<p class="page-hint">選擇難度，與電腦進行限時四選一。答對加分，連續答對會提高倍率。</p>
 </main>
-<footer id="resources" class="site-footer py-5"><div class="container-xl"><div class="row g-4 align-items-start">
-<div class="col-lg-7"><div class="h5 fw-bold text-white">延伸探索</div><p class="mb-0">遊戲範例由 Phaser 官方範例網站提供，需連線載入。網站以 Bootstrap CDN 排版。</p></div>
-<div class="col-lg-5"><div class="d-flex flex-column gap-2"><a href="https://labs.phaser.io/phaser4-index.html?path=games" target="_blank" rel="noopener">Phaser 4 官方遊戲範例</a><a href="https://docs.phaser.io/phaser/concepts/physics/arcade" target="_blank" rel="noopener">Phaser Arcade Physics 文件</a><a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank" rel="noopener">Bootstrap CDN 說明</a></div></div>
-</div><div class="border-top border-secondary mt-4 pt-3 small">設計原則 讓挑戰、回饋與學習目標彼此對齊</div></div></footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/phaser@4.2.1/dist/phaser.min.js"></script>
-<script>
-document.querySelectorAll(".ratio.ratio-4x3").forEach((frame) => {
-  const stage = document.createElement("div")
-  stage.className = "game-stage"
-  frame.parentNode.insertBefore(stage, frame)
-  stage.appendChild(frame)
-
-  const button = document.createElement("button")
-  button.type = "button"
-  button.className = "game-fullscreen btn btn-light btn-sm rounded-pill shadow"
-  button.textContent = "⛶ 全螢幕"
-  button.setAttribute("aria-label", "將這個遊戲放大至全螢幕")
-  button.setAttribute("aria-pressed", "false")
-
-  button.addEventListener("click", async () => {
-    try {
-      if (document.fullscreenElement === stage) {
-        await document.exitFullscreen()
-      } else {
-        await stage.requestFullscreen()
-      }
-    } catch {
-      button.textContent = "無法開啟全螢幕"
-    }
-  })
-
-  stage.appendChild(button)
-})
-
-document.addEventListener("fullscreenchange", () => {
-  document.querySelectorAll(".game-fullscreen").forEach((button) => {
-    const stage = button.closest(".game-stage")
-    const active = document.fullscreenElement === stage
-    button.textContent = active ? "離開全螢幕" : "⛶ 全螢幕"
-    button.setAttribute("aria-pressed", String(active))
-  })
-})
-
-const quizQuestions = {
+<script>const quizQuestions = {
   simple: [
     { prompt: "現金屬於哪一類會計要素？", choices: ["資產", "負債", "權益", "收入"], answer: 0, explanation: "現金是企業可以支用的資源，屬於資產。" },
     { prompt: "應付帳款代表企業目前有什麼？", choices: ["尚未收回的款項", "尚未償還的付款義務", "業主投入的資本", "已賺得的收入"], answer: 1, explanation: "應付帳款通常來自賒購，表示企業尚未清償的負債。" },
@@ -308,8 +166,8 @@ function createQuizGame(data) {
   scene.add.text(480, 34, "會計知識王", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "38px", color: "#f3f4df", fontStyle: "bold" }).setOrigin(0.5)
   scene.add.text(480, 78, "玩家 VS 電腦", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "21px", color: "#a8c1c4" }).setOrigin(0.5)
 
-  const menuPanel = scene.add.rectangle(860, 78, 170, 44, 0x2c5b60).setStrokeStyle(2, 0x8bc9ae).setInteractive({ useHandCursor: true })
-  const menuLabel = scene.add.text(860, 78, "返回難度選擇", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "17px", color: "#ffffff", fontStyle: "bold" }).setOrigin(0.5)
+  const menuPanel = scene.add.rectangle(105, 78, 170, 44, 0x2c5b60).setStrokeStyle(2, 0x8bc9ae).setInteractive({ useHandCursor: true })
+  const menuLabel = scene.add.text(105, 78, "返回難度選擇", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "17px", color: "#ffffff", fontStyle: "bold" }).setOrigin(0.5)
   menuPanel.on("pointerdown", () => scene.scene.restart())
 
   scene.add.rectangle(250, 168, 340, 92, 0x1c3b4c).setStrokeStyle(2, 0x4a827b)
@@ -494,6 +352,27 @@ function showQuizMenu(scene) {
 
   scene.add.text(480, 580, "選項包含科目分類、借貸方向與會計分錄，答題後會公布答案與解說", { fontFamily: "Microsoft JhengHei, sans-serif", fontSize: "18px", color: "#a8c1c4", align: "center", wordWrap: { width: 850 } }).setOrigin(0.5)
 }
+</script>
+<script>
+const gameStage = document.getElementById("gameStage")
+const fullscreenButton = document.getElementById("fullscreenButton")
+
+fullscreenButton.addEventListener("click", async () => {
+  try {
+    if (document.fullscreenElement === gameStage) {
+      await document.exitFullscreen()
+    } else {
+      await gameStage.requestFullscreen()
+    }
+  } catch {
+    fullscreenButton.textContent = "全螢幕無法開啟"
+  }
+})
+
+document.addEventListener("fullscreenchange", () => {
+  const active = document.fullscreenElement === gameStage
+  fullscreenButton.textContent = active ? "離開全螢幕" : "⛶ 全螢幕"
+})
 </script>
 </body>
 </html>

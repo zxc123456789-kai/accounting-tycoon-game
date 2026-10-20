@@ -5,7 +5,7 @@
 ## GitHub Pages
 
 - [Accounting Tycoon](https://zxc123456789-kai.github.io/accounting-tycoon-game/)
-- [遊戲式學習設計指南與會計知識王](https://zxc123456789-kai.github.io/accounting-tycoon-game/game-learning.html)
+- [機制 04 會計知識王](https://zxc123456789-kai.github.io/accounting-tycoon-game/game-learning.html)
 
 ## 開始遊玩
 
